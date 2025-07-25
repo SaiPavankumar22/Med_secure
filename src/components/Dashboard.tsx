@@ -79,38 +79,49 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Patient Dashboard Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Patient Dashboard</h2>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+            <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+              <Upload className="w-4 h-4 text-blue-600" />
+            </div>
+            Patient Dashboard
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-4">
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-700 mb-3">Upload Medical Data</h3>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-6">
+              <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                  <Upload className="w-4 h-4 text-blue-600" />
+                  Upload Medical Data
+                </h3>
+                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors flex items-center justify-center gap-2 font-medium">
                   <Upload className="w-4 h-4" />
                   Upload File
                 </button>
               </div>
             </div>
             
-            <div className="space-y-4">
-              <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-700 mb-3">Manage Permissions</h3>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <div className="flex items-center gap-2">
+            <div className="space-y-6">
+              <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-green-600" />
+                  Manage Permissions
+                </h3>
+                <div className="space-y-3 text-sm text-gray-600">
+                  <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
                     <MapPin className="w-4 h-4" />
-                    City Hospital
+                    <span>City Hospital</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
                     <MapPin className="w-4 h-4" />
-                    Green Valley Clinic
+                    <span>Green Valley Clinic</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 p-2 bg-gray-50 rounded-lg">
                     <MapPin className="w-4 h-4" />
-                    Sunrise Labs
+                    <span>Sunrise Labs</span>
                   </div>
                 </div>
               </div>
@@ -119,16 +130,21 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* AI Health Insights */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">AI Health Insights</h2>
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+            <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+              <TrendingUp className="w-4 h-4 text-purple-600" />
+            </div>
+            AI Health Insights
+          </h2>
           
-          <div className="space-y-4">
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-700 mb-3 flex items-center gap-2">
+          <div className="space-y-6">
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-semibold text-gray-700 mb-4 flex items-center gap-2">
                 <TrendingUp className="w-4 h-4" />
                 Risk Score Prediction
               </h3>
-              <div className="h-48">
+              <div className="h-56">
                 <Line data={chartData} options={chartOptions} />
               </div>
             </div>
@@ -137,47 +153,57 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Provider Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Provider Panel</h2>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+            <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-4 h-4 text-orange-600" />
+            </div>
+            Provider Panel
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-700 mb-3">Request Access</h3>
-              <button className="w-full bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-semibold text-gray-700 mb-4">Request Access</h3>
+              <button className="w-full bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg transition-colors font-medium">
                 Request
               </button>
             </div>
             
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-700 mb-3">View Patient Data</h3>
-              <div className="space-y-2">
-                <div className="bg-gray-100 h-2 rounded"></div>
-                <div className="bg-gray-100 h-2 rounded w-3/4"></div>
-                <div className="bg-gray-100 h-2 rounded w-1/2"></div>
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-semibold text-gray-700 mb-4">View Patient Data</h3>
+              <div className="space-y-3">
+                <div className="bg-gray-100 h-3 rounded-lg animate-pulse"></div>
+                <div className="bg-gray-100 h-3 rounded-lg w-3/4 animate-pulse"></div>
+                <div className="bg-gray-100 h-3 rounded-lg w-1/2 animate-pulse"></div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Second Provider Panel */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Provider Panel</h2>
+        <div className="bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+            <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+              <FileText className="w-4 h-4 text-green-600" />
+            </div>
+            Provider Panel
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-700 mb-3">Request Access</h3>
-              <div className="space-y-2">
-                <div className="bg-gray-100 h-8 rounded"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-semibold text-gray-700 mb-4">Request Access</h3>
+              <div className="space-y-3">
+                <div className="bg-gray-100 h-10 rounded-lg animate-pulse"></div>
               </div>
             </div>
             
-            <div className="border border-gray-200 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-700 mb-3">View Patient Data</h3>
-              <div className="space-y-2">
-                <div className="bg-gray-100 h-2 rounded"></div>
-                <div className="bg-gray-100 h-2 rounded w-3/4"></div>
-                <div className="bg-gray-100 h-2 rounded w-1/2"></div>
+            <div className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+              <h3 className="font-semibold text-gray-700 mb-4">View Patient Data</h3>
+              <div className="space-y-3">
+                <div className="bg-gray-100 h-3 rounded-lg animate-pulse"></div>
+                <div className="bg-gray-100 h-3 rounded-lg w-3/4 animate-pulse"></div>
+                <div className="bg-gray-100 h-3 rounded-lg w-1/2 animate-pulse"></div>
               </div>
             </div>
           </div>
@@ -185,20 +211,24 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Audit Logs */}
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-          <FileText className="w-6 h-6" />
+      <div className="bg-white rounded-xl shadow-lg p-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3">
+          <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+            <FileText className="w-4 h-4 text-gray-600" />
+          </div>
           Audit Logs
         </h2>
         
-        <div className="space-y-3">
+        <div className="space-y-4">
           {auditLogs.map((log) => (
-            <div key={log.id} className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg">
+            <div key={log.id} className="flex items-center justify-between py-4 px-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
               <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4 text-gray-500" />
-                <span className="text-gray-700">{log.action}</span>
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Clock className="w-4 h-4 text-blue-600" />
+                </div>
+                <span className="text-gray-700 font-medium">{log.action}</span>
               </div>
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-500 font-medium">
                 {log.date} {log.time}
               </div>
             </div>
