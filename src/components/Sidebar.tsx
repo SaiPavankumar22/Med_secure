@@ -15,7 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, activeSection, onSe
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'patient', label: 'Patient Data', icon: Users },
-    { id: 'provider', label: 'Provider Panel', icon: Activity },
+   
     { id: 'insights', label: 'AI Insights', icon: FileText },
     ...(userProfile?.role === 'admin' || userProfile?.role === 'authorized' ? [
       { id: 'encryption', label: 'File Encryption', icon: Shield },
