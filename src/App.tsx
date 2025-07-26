@@ -76,7 +76,7 @@ const MainApp: React.FC = () => {
       />
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-0">
+      <div className="flex-1 lg:ml-64">
         {/* Top Navigation */}
         <nav className="bg-blue-900/80 backdrop-blur-sm text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
