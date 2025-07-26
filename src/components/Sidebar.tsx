@@ -1,5 +1,6 @@
 import React from 'react';
 import { FileCheck, FileX, Upload, Download, Home, Users, Activity, Shield, FileText } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,13 +10,20 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, activeSection, onSectionChange }) => {
+  const { userProfile } = useAuth();
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'patient', label: 'Patient Data', icon: Users },
     { id: 'provider', label: 'Provider Panel', icon: Activity },
     { id: 'insights', label: 'AI Insights', icon: FileText },
-    { id: 'encryption', label: 'File Encryption', icon: Shield },
-    { id: 'decryption', label: 'File Decryption', icon: FileCheck },
+    ...(userProfile?.role === 'admin' || userProfile?.role === 'authorized' ? [
+      { id: 'encryption', label: 'File Encryption', icon: Shield },
+      { id: 'decryption', label: 'File Decryption', icon: FileCheck },
+    ] : []),
+    ...(userProfile?.role === 'admin' ? [
+      { id: 'admin', label: 'Admin Panel', icon: Users },
+    ] : []),
     { id: 'audit', label: 'Audit Logs', icon: FileX }
   ];
 
@@ -63,6 +71,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, activeSection, onSe
           
           {/* Logout Button */}
           <div className="p-6 border-t border-slate-700 flex-shrink-0">
+            <div className="mb-4 text-center">
+              <p className="text-sm text-gray-300">{userProfile?.name}</p>
+              <p className="text-xs text-gray-400">{userProfile?.email}</p>
+              <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-2 ${
+                userProfile?.role === 'admin' ? 'bg-red-100 text-red-800' :
+                userProfile?.role === 'authorized' ? 'bg-green-100 text-green-800' :
+                'bg-gray-100 text-gray-800'
+              }`}>
+                {userProfile?.role}
+              </span>
+            </div>
             <button className="w-full bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg transition-colors font-medium">
               Logout
             </button>

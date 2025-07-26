@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FileEncryption from './components/FileEncryption';
 import FileDecryption from './components/FileDecryption';
+import AdminPanel from './components/AdminPanel';
 
-function App() {
+const MainApp: React.FC = () => {
+  const { currentUser, userProfile } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
+
+  if (!currentUser || !userProfile) {
+    return <Navigate to="/login" replace />;
+  }
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -25,6 +35,8 @@ function App() {
         return <FileEncryption />;
       case 'decryption':
         return <FileDecryption />;
+      case 'admin':
+        return userProfile.role === 'admin' ? <AdminPanel /> : <Dashboard />;
       default:
         return <Dashboard />;
     }
@@ -44,6 +56,8 @@ function App() {
         return 'File Encryption';
       case 'decryption':
         return 'File Decryption';
+      case 'admin':
+        return 'Admin Panel';
       case 'audit':
         return 'Audit Logs';
       default:
@@ -52,7 +66,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-800 flex">
+    <div className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-900 flex">
       {/* Sidebar */}
       <Sidebar
         isOpen={sidebarOpen}
@@ -64,7 +78,7 @@ function App() {
       {/* Main Content */}
       <div className="flex-1 lg:ml-0">
         {/* Top Navigation */}
-        <nav className="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+        <nav className="bg-blue-900/80 backdrop-blur-sm text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={toggleSidebar}
@@ -94,6 +108,21 @@ function App() {
       </div>
     </div>
   );
-}
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/dashboard" element={<MainApp />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
 export default App;

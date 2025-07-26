@@ -1,13 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Shield, Download, AlertCircle, CheckCircle } from 'lucide-react';
 import CryptoJS from 'crypto-js';
+import { useAuth } from '../context/AuthContext';
 
 const FileEncryption: React.FC = () => {
+  const { userProfile, addAuditLog } = useAuth();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEncrypting, setIsEncrypting] = useState(false);
   const [encryptedData, setEncryptedData] = useState<string | null>(null);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Check if user has permission
+  const hasPermission = userProfile?.role === 'admin' || userProfile?.role === 'authorized';
 
   // Unique signature for our website
   const WEBSITE_SIGNATURE = 'MEDSECURE_2024_ENCRYPTED_FILE';
@@ -62,6 +67,13 @@ const FileEncryption: React.FC = () => {
         type: 'success',
         text: 'File encrypted successfully! Only this website can decrypt it.'
       });
+
+      // Add audit log
+      await addAuditLog(`File encrypted: ${selectedFile.name}`, {
+        fileName: selectedFile.name,
+        fileSize: selectedFile.size,
+        action: 'file_encryption'
+      });
     } catch (error) {
       setMessage({
         type: 'error',
@@ -85,6 +97,30 @@ const FileEncryption: React.FC = () => {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+
+  if (!hasPermission) {
+    return (
+      <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="flex items-center gap-3 mb-6">
+          <Shield className="w-6 h-6 text-gray-400" />
+          <h2 className="text-2xl font-bold text-gray-800">File Encryption</h2>
+        </div>
+        
+        <div className="text-center py-12">
+          <Shield className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-xl font-semibold text-gray-700 mb-2">Access Restricted</h3>
+          <p className="text-gray-600 mb-6">
+            File encryption is only available to authorized users and administrators.
+          </p>
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 max-w-md mx-auto">
+            <p className="text-sm text-amber-700">
+              Request authorization upgrade from the Provider Panel to access this feature.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
