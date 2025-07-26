@@ -1,7 +1,7 @@
 import React from 'react';
 import { FileCheck, FileX, Upload, Download, Home, Users, Activity, Shield, FileText } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-
+import {Link} from 'react-router-dom'
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
