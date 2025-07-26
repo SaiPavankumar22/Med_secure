@@ -82,9 +82,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, activeSection, onSe
                 {userProfile?.role}
               </span>
             </div>
+            <Link to="/login">
             <button className="w-full bg-red-600 hover:bg-red-700 px-4 py-3 rounded-lg transition-colors font-medium">
               Logout
             </button>
+              </Link>
           </div>
         </div>
       </div>
