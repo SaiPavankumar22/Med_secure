@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
 import FileEncryption from './components/FileEncryption';
 import FileDecryption from './components/FileDecryption';
+import MedicalAnalysis from './components/MedicalAnalysis';
 import AdminPanel from './components/AdminPanel';
 
 const MainApp: React.FC = () => {
@@ -35,6 +36,8 @@ const MainApp: React.FC = () => {
         return <FileEncryption />;
       case 'decryption':
         return <FileDecryption />;
+      case 'analysis':
+        return <MedicalAnalysis />;
       case 'admin':
         return userProfile.role === 'admin' ? <AdminPanel /> : <Dashboard />;
       default:

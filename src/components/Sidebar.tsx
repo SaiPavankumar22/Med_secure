@@ -20,6 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, activeSection, onSe
     ...(userProfile?.role === 'admin' || userProfile?.role === 'authorized' ? [
       { id: 'encryption', label: 'File Encryption', icon: Shield },
       { id: 'decryption', label: 'File Decryption', icon: FileCheck },
+      { id: 'analysis', label: 'Medical Analysis', icon: Activity },
     ] : []),
     ...(userProfile?.role === 'admin' ? [
       { id: 'admin', label: 'Admin Panel', icon: Users },
